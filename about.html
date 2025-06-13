@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>about</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .hamburger-btn {
+      display: none;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger-btn {
+        display: block;
+      }
+
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #111;
+        z-index: 999;
+        padding: 10px 0;
+      }
+
+      .nav-menu.show {
+        display: flex;
+      }
+
+      .nav-menu li {
+        text-align: center;
+        margin: 10px 0;
+      }
+
+      .navbar .container {
+        flex-wrap: wrap;
+        position: relative;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">HTML</div>
+      <div class="hamburger-btn" onclick="toggleMenu()">☰</div>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="/" onclick="closeMenu()">Home</a></li>
+        <li><a href="To-do.html" onclick="closeMenu()">To-do</a></li>
+        <li><a href="Teamproject.html" onclick="closeMenu()">Teamproject</a></li>
+        <li><a href="Project.html" onclick="closeMenu()">Project</a></li>
+        <li><a href="about.html" onclick="closeMenu()">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h2 class="about-title">팀원</h2>
+    <section class="about-boxes">
+      <a href="https://github.com/ydam113" class="about-box-link" target="_blank">
+        <div class="about-box">
+          <img src="ydam.png" alt="ydam" />
+          <h3>92118499 박용담</h3>
+        </div>
+      </a>
+      <a href="https://github.com/yoonho04" class="about-box-link" target="_blank">
+        <div class="about-box">
+          <img src="yoonho.png" alt="yoonho" />
+          <h3>92112952 김윤호</h3>
+        </div>
+      </a>
+      <a href="https://github.com/kwc7706" class="about-box-link" target="_blank">
+        <div class="about-box">
+          <img src="kwc.png" alt="kwc" />
+          <h3>92550130 김우찬</h3>
+        </div>
+      </a>
+      <a href="https://github.com/hojun-04" class="about-box-link" target="_blank">
+        <div class="about-box">
+          <img src="hojun.png" alt="hojun" />
+          <h3>92313661 정호준</h3>
+        </div>
+      </a>
+    </section>
+
+    <section class="source-box">
+      <h3>출처</h3>
+      <p>
+        <b>index</b> 파일에서 사용한 소스의 출처:
+        <a href="https://www.w3schools.com/" target="_blank">w3schools</a><br />
+        <b>secon</b> 파일에서 사용한 소스의 출처:
+        <a href="https://www.seconexpo.com/2025/kor/main.asp" target="_blank">세계보안엑스포</a>,
+        <a href="https://www.youtube.com/watch?v=Ev2M6KVU0os&t=12s" target="_blank">KEVIS 채널 영상</a><br />
+        <b>teamproject</b>와 <b>project</b>의 파일 코드는 직접 제작한 소스입니다.<br />
+        모르는 코드는 w3schools과 그동안의 수업시간에 배운 명령어, PPT에서 찾아 사용하였습니다<br>
+        충돌하는 부분들을 수정하다가 혼자힘으로는 못하겠을때 chat gpt를 사용하였습니다.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <h2>ⓒ 웹프로그래밍 중간과제. 정호준.</h2>
+    </div>
+  </footer>
+
+  <script>
+    const menu = document.getElementById('navMenu');
+
+    function toggleMenu() {
+      menu.classList.toggle('show');
+    }
+
+    function closeMenu() {
+      menu.classList.remove('show');
+    }
+
+    // 메뉴 외부 클릭 시 닫기
+    document.addEventListener('click', function (event) {
+      const isClickInside = menu.contains(event.target) || event.target.classList.contains('hamburger-btn');
+      if (!isClickInside) {
+        closeMenu();
+      }
+    });
+  </script>
+</body>
+</html>

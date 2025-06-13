@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-do 프로젝트</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* 네비게이션 바 기본 스타일 */
+    .navbar {
+      background-color: #333;
+      padding: 1rem 0;
+      color: white;
+    }
+
+    .navbar .container {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .nav {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    /* To-do 박스 전체 */
+    .box {
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #fefefe;
+      border: 2px solid #ddd;
+      border-radius: 1rem;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    .todo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #todo-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    #todo-input, #todo-date {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      width: 100%;
+    }
+
+    #todo-form button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+
+    #todo-list {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    #todo-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f1f1f1;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s ease;
+      gap: 10px;
+    }
+
+    #todo-list li.completed span {
+      text-decoration: line-through;
+      color: #888;
+    }
+
+    #todo-list input[type="checkbox"] {
+      transform: scale(1.2);
+      cursor: pointer;
+    }
+
+    #todo-list button {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 0.3rem;
+      cursor: pointer;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ 네비게이션 -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">HTML</div>
+      <div class="hamburger-btn" onclick="toggleMenu()">☰</div>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="/">Home</a></li>
+        <li><a href="To-do.html">To-do</a></li>
+        <li><a href="Teamproject.html">Teamproject</a></li>
+        <li><a href="Project.html">Project</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ✅ To-do 리스트 박스 -->
+  <div class="box">
+    <div class="todo-container">
+      <h1>📋 기말고사 이후 할 것들</h1>
+      <form id="todo-form">
+        <input type="text" id="todo-input" placeholder="할 일을 입력하세요" required />
+        <input type="date" id="todo-date" required />
+        <button type="submit">추가</button>
+      </form>
+      <ul id="todo-list"></ul>
+    </div>
+  </div>
+
+  <!-- ✅ JavaScript -->
+  <script>
+    const form = document.getElementById('todo-form');
+    const input = document.getElementById('todo-input');
+    const dateInput = document.getElementById('todo-date');
+    const list = document.getElementById('todo-list');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const todoText = input.value.trim();
+      const dueDate = dateInput.value;
+
+      if (todoText === '' || dueDate === '') return;
+
+      const li = document.createElement('li');
+
+      // 체크박스
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.addEventListener('change', () => {
+        li.classList.toggle('completed', checkbox.checked);
+      });
+
+      // 할 일 텍스트 + 남은 날짜
+      const span = document.createElement('span');
+      const daysLeft = calculateDaysLeft(dueDate);
+      span.textContent = `${todoText} (D-${daysLeft})`;
+
+      // 삭제 버튼
+      const delBtn = document.createElement('button');
+      delBtn.textContent = '삭제';
+      delBtn.addEventListener('click', () => li.remove());
+
+      // 항목 구성
+      li.appendChild(checkbox);
+      li.appendChild(span);
+      li.appendChild(delBtn);
+
+      list.appendChild(li);
+      input.value = '';
+      dateInput.value = '';
+    });
+
+    function calculateDaysLeft(dueDateStr) {
+      const due = new Date(dueDateStr);
+      const today = new Date();
+      const diffTime = due - today;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      return diffDays >= 0 ? diffDays : 0;
+    }
+  </script>
+</body>
+</html>

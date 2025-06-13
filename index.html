@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>웹프로그래밍</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <!-- 메뉴 -->
+<nav class="navbar">
+  <div class="container">
+    <div class="logo">HTML</div>
+    <div class="hamburger-btn" onclick="toggleMenu()">☰</div>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="/">Home</a></li>
+      <li><a href="To-do.html">To-do</a></li>
+      <li><a href="Teamproject.html">Teamproject</a></li>
+      <li><a href="Project.html">Project</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <!-- 메인 섹션 -->
+    <section class="main">
+      <div class="container">
+        <h1>웹프로그래밍. Web Programming....</h1>
+        <h2>중부대학교 정보보호학과 정호준</h2>
+
+        <div class="custom-info-box">
+          <h3>웹 개발자를 위한 온라인 매뉴얼:</h3>
+          <a href="http://127.0.0.1:5500/Project.html"  class="manual-link">팀프로젝트</a>
+
+        
+
+          <p>현재시간: <span id="time"></span></p>
+
+          <hr />
+
+          <p>
+            배경색 바꾸기(그라데이션):
+            <button onclick="pink()" class="color-button">Pink</button>
+            <button onclick="lightblue()" class="color-button">Lightblue</button>
+            <button onclick="yellow()" class="color-button">Yellow</button>
+            <button onclick="reset()" class="color-button">Reset</button>
+          </p>
+
+          <hr />
+        </div>
+
+        <h2 class="contact-title">연락처</h2>
+
+        <div class="link-box-container">
+          <a href="https://www.instagram.com/jeonghojun24/?hl=ko" class="link-box" target="_blank">
+            <img src="Instargram.png" alt="Image 1" />
+            <p>인스타그램</p>
+          </a>
+        </div>
+        <h2>메일:hojunj49@naver.com</h2>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <h2>ⓒ 웹프로그래밍 중간과제. 정호준.</h2>
+      </div>
+    </footer>
+
+    <script>
+      // 현재 시간 표시
+      function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        document.getElementById("time").textContent = timeString;
+      }
+      setInterval(updateTime, 1000);
+      updateTime();
+
+      // 배경색 버튼 함수들
+      function pink() {
+        document.body.style.backgroundColor = "pink";
+      }
+
+      function lightblue() {
+        document.body.style.backgroundColor = "lightblue";
+      }
+
+      function yellow() {
+        document.body.style.backgroundColor = "yellow";
+      }
+
+      function reset() {
+        document.body.style.backgroundColor = "";
+      }
+
+      // 다크모드 토글 기능 + 버튼 텍스트 변경
+      const darkModeToggle = document.getElementById("darkModeToggle");
+
+      darkModeToggle.addEventListener("click", function () {
+        document.body.classList.toggle("dark");
+
+        if (document.body.classList.contains("dark")) {
+          darkModeToggle.textContent = "☀️ 라이트모드";
+          document.body.style.backgroundColor = ""; // 배경색 초기화
+        } else {
+          darkModeToggle.textContent = "🌙 다크모드";
+          document.body.style.backgroundColor = "";
+        }
+      });
+    </script>
+    <script>
+  // 현재 시간 표시
+  function updateTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString();
+    document.getElementById("time").textContent = timeString;
+  }
+  setInterval(updateTime, 1000);
+  updateTime();
+
+  // 그라데이션 배경 적용 함수
+  function pink() {
+    document.body.style.backgroundImage = "linear-gradient(to right, #ff9a9e, #fad0c4)";
+  }
+
+  function lightblue() {
+    document.body.style.backgroundImage = "linear-gradient(to right, #89f7fe, #66a6ff)";
+  }
+
+  function yellow() {
+    document.body.style.backgroundImage = "linear-gradient(to right, #fceabb, #f8b500)";
+  }
+
+  function reset() {
+    document.body.style.backgroundImage = "";
+  }
+
+
+</script>
+
+  </body>
+</html>
